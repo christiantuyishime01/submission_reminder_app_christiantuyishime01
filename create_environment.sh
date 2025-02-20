@@ -1,39 +1,46 @@
 #!/bin/bash
-echo "Enter your first and last name"
-read yourname
 
-#create the main directory 
-main_dir="submission_reminder_$yourname"
-mkdir -p "$main_dir/scripts"
+# Ask for user's name
+echo "Enter your name:"
+read user_name
+
+# Define the main directory name
+main_dir="submission_reminder_${user_name}"
+
+# Create the main directory
+mkdir -p "$main_dir"
+
+# Create required subdirectories
+mkdir -p "$main_dir/app"
+mkdir -p "$main_dir/modules"
+mkdir -p "$main_dir/assets"
 mkdir -p "$main_dir/config"
 
-#create and populate the files
+# Create required files
+touch "$main_dir/app/reminder.sh"
+touch "$main_dir/modules/functions.sh"
+touch "$main_dir/assets/submissions.txt"
+touch "$main_dir/config/config.env"
+touch "$main_dir/startup.sh"
 
-#config.env
-cat <<EOL > "$main_dir/config/config.env"
-# Configuration Environment file
-# Add your configuration details here
-EOL
-
-# submissions.txt
-cat <<EOL > "$main_dir/submissons.txt"
-student_id,students_name,submission_status
+# Populate submissions.txt with sample records
+cat <<EOL > "$main_dir/assets/submissions.txt"
 student, assignment, submission status
-1,Chinemerem, Shell Navigation, not submitted
-2,Chiagoziem, Git, submitted
-3,Divine, Shell Navigation, not submitted
-4,Anissa, Shell Basics, submitted
+Chinemerem, Shell Navigation, not submitted
+Chiagoziem, Git, submitted
+Divine, Shell Navigation, not submitted
+Anissa, Shell Basics, submitted
+Gabriel, Shell, submitted
+Sukuma, Python, not submitted
+Joseph, Powershell, submitted
+Gettskent, Python Basics, submitted
+Rulisa, Git Bash, not submitted
+Derrick, Shell Basics, not submitted
 EOL
 
-#startup.sh
-cat <<EOL > "$main_dir/scripts/startup.sh"
-#!/bin/bash
-echo "Starting submission Reminder App..."
-# Add your startup logic here
-EOL
+# Add executable permissions to startup.sh
+chmod +x "$main_dir/startup.sh"
 
-# Make startup.sh executable
-chmod +x "$main_dir/scripts/startup.sh"
-
-echo "Environment setup complete. You can now run the startup script using:"
-
+# Print success message
+echo "Environment setup completed successfully!"
+echo "Directory structure created: $main_dir"
